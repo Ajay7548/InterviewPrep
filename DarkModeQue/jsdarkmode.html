@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dark Mode Toggler</title>
+  </head>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vh;
+      height: 100vh;
+      margin: 0;
+      background-color: white;
+      color: black;
+    }
+    .dark-mode {
+      background-color: #121212;
+      color: white;
+    }
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      margin: 20px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
+  </style>
+  <body>
+    <button id="theme-toggle">Toggle Dark Mode</button>
+  </body>
+  <script>
+    const button = document.getElementById("theme-toggle");
+    const DARK_MODE_KEY = "darkModeEnabled";
+
+    // On page load: check localStorage and apply dark mode if enabled
+    if (localStorage.getItem(DARK_MODE_KEY) === "true") {
+      document.body.classList.add("dark-mode");
+    }
+
+    button.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      const isDarkMode = document.body.classList.contains("dark-mode");
+      localStorage.setItem(DARK_MODE_KEY, isDarkMode);
+    });
+  </script>
+</html>
