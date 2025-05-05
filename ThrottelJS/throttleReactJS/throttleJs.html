@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scroll Throttle</title>
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      height: 90vh;
+      overflow-y: auto;
+      border: 1px solid #333;
+      padding: 20px;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    .contentItem {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #444;
+      border-radius: 8px;
+      background-color: #161b22;
+      transition: transform 0.2s;
+    }
+
+    .contentItem:hover {
+      transform: scale(1.01);
+      border-color: #58a6ff;
+    }
+
+    .scroll-position {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #ffffff;
+      padding: 8px 14px;
+      font-size: 14px;
+      border-radius: 6px;
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="scrollContainer">
+    <div class="content" id="content">
+      <!-- Sample repeated items -->
+      <!-- Use JS to generate if preferred -->
+      <div class="contentItem">
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, mollitia!</p>
+      </div>
+      <div class="contentItem">
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, mollitia!</p>
+      </div>
+      <div class="contentItem">
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, mollitia!</p>
+      </div>
+      <div class="contentItem">
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, mollitia!</p>
+      </div>
+      <div class="contentItem">
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, mollitia!</p>
+      </div>
+      <div class="contentItem">
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, mollitia!</p>
+      </div>
+      <div class="contentItem">
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, mollitia!</p>
+      </div>
+      <div class="contentItem">
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, mollitia!</p>
+      </div>
+      <div class="contentItem">
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, mollitia!</p>
+      </div>
+      <div class="contentItem">
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, mollitia!</p>
+      </div>
+      <!-- You can duplicate or generate more as needed -->
+      <!-- For demo purposes, copy-paste this div multiple times -->
+    </div>
+  </div>
+  <div class="scroll-position" id="scroll-position">
+    Scroll Position (Y): 0px
+  </div>
+
+  <script>
+    // Throttle Function
+    function throttle(func, delay) {
+      let lastCall = 0;
+      return function (...args) {
+        const now = Date.now();
+        if (now - lastCall >= delay) {
+          lastCall = now;
+          func(...args);
+        }
+      };
+    }
+
+    // Scroll Handler
+    function handleScroll() {
+      const scrollContainer = document.getElementById('scrollContainer');
+      const scrollPosition = document.getElementById('scroll-position');
+      const scrollY = scrollContainer.scrollTop;
+      scrollPosition.textContent = `Scroll Position (Y): ${Math.round(scrollY)}px`;
+    }
+
+    // Attach Throttled Listener
+    const scrollContainer = document.getElementById('scrollContainer');
+    scrollContainer.addEventListener('scroll', throttle(handleScroll, 200));
+  </script>
+
+</body>
+</html>

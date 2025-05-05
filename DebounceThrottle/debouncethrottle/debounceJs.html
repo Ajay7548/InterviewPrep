@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body style="background-color: black; color: white;">
+    <div>
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="search University name..."
+      />
+      <ul id="resultList"></ul>
+      
+    </div>
+  </body>
+  <script>
+
+   
+    //debounce Function
+    const debounce = function (func, delay) {
+      let timer;
+      return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => func(...args), delay);
+      };
+    };
+
+    //fetchData function
+
+    const fetchData = async function debounce(serachItem) {
+      if (!serachItem) return;
+
+      try {
+        const res = await fetch(
+          `http://universities.hipolabs.com/search?country=India&name=${serachItem}`
+        );
+        const data = await res.json();
+        setResults(data.map((u) => u.name));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setResults([]);
+      }
+    };
+
+
+    const debounceFetch = debounce(fetchData,500)
+
+const searchInput = document.getElementById('searchInput')
+searchInput.addEventListener('input', (e)=>{
+    debounceFetch(e.target.value)
+})
+
+function setResults(results){
+    const resultList = document.getElementById('resultList')
+    resultList.innerHTML=''
+
+    if (results.length > 0) {
+        results.forEach((item)=>{
+            const li = document.createElement('li')
+            li.textContent = item
+            resultList.appendChild(li)
+        })
+    } else {
+        const li = document.createElement('li')
+        li.textContent= "No result Found"
+        resultList.appendChild(li)
+    }
+}
+
+
+  </script>
+</html>
+

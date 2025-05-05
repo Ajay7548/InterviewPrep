@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="index.css">
+<body>
+    <div class="container">
+        <div class="main">
+            <button onclick={increase()} class="btn">+</button>
+            <p>Counter: <span id="count"></span> </p>
+            <button onclick={decrease()} class="btn">-</button>
+        </div>
+    </div>
+    <button onclick="reset()" class="btn">Reset</button>
+</body>
+
+<script>
+// let count =0
+
+//localstorage
+let count = parseInt(localStorage.getItem('counter')) || 0;
+const countDisplay = document.getElementById('count')
+
+// localStorage
+countDisplay.textContent=count
+
+
+
+//localtsorage
+function updateDisplay() {
+      countDisplay.textContent = count;
+      localStorage.setItem('counter', count);
+}
+
+function increase(){
+    if (count>=10) {
+        alert("Counter cannot be greater than zero")
+    }else{
+        count ++;
+        // countDisplay.textContent=count
+        updateDisplay()
+    }
+}
+
+function decrease(){
+    if(count>0){
+        count --
+        // countDisplay.textContent=count
+        updateDisplay()
+    }else{
+        alert("Counter cannot be lower than zero")
+
+    }
+}
+
+function reset() {
+      count = 0;
+    //   countDisplay.textContent = count;
+    updateDisplay()
+    }
+</script>
+</html>
