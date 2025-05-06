@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: black; color: white;">
+    <input type="text" id="search" placeholder="Search item....">
+    <ul id="itemsList">
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Mango</li>
+        <li>Grapes</li>
+        <li>Cake</li>
+        <li>Orange</li>
+        <li>Pumpkin</li>
+        <li>Potato</li>
+        <li>Curd</li>
+        <li>Chai</li>
+    </ul>
+</body>
+<script>
+
+    const searchInput = document.getElementById('search')
+    const items = document.querySelectorAll('#itemsList li')
+    // debounce function 
+    const debounce = (fn, delay) => {
+      let timeout;
+      return (...args) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => fn(...args), delay);
+      };
+    };
+
+    //Normal filter 
+    const filterItems = () =>{
+        const query = searchInput.value.toLowerCase()
+        items.forEach(item =>{
+            const text = item.textContent.toLowerCase()
+            item.style.display = text.includes(query)? "" : 'none'
+        })
+    }
+
+    // atach debpunce version to input 
+    const debounceFilter = debounce(filterItems,300)
+    searchInput.addEventListener('input',debounceFilter)
+
+</script>
+</html>

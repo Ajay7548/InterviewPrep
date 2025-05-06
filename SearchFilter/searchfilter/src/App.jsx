@@ -25,8 +25,6 @@ const App = () => {
 
     //debounce serach
     item.toLowerCase().includes(debounceSearch.toLowerCase()) )
-  
-  
 
   return (
     <div>
