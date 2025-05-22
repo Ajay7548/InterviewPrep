@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .error {
+            color: red;
+        }
+
+        .btn {
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid blue;
+        }
+
+        #loginForm {
+            display: flex;
+            height: 100vh;
+            flex-direction: column;
+            gap: 5px;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body style="color: white; background-color: black">
+    <form id="loginForm">
+        <div style="
+          margin-bottom: 4px;
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+        ">
+            <label style="font-size: 20px">Email:</label>
+            <input type="text" style="padding: 5px ;width: 300px;" placeholder="Email" id="email" />
+            <span class="error" id="emailError"></span>
+        </div>
+        <div style="
+          margin-bottom: 4px;
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+        ">
+            <label style="font-size: 20px">Password:</label>
+            <input type="password" style="padding: 5px; width: 300px;" placeholder="Password" id="password" />
+            <span class="error" id="passwordError"></span><br />
+        </div>
+        <button class="btn" type="submit">Submit</button>
+    </form>
+</body>
+
+<script>
+    const loginForm = document.getElementById('loginForm')
+    const email = document.getElementById('email')
+    const emailError = document.getElementById('emailError')
+    const password = document.getElementById('password')
+    const passwordError = document.getElementById('passwordError')
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+
+        emailError.textContent = ''
+        passwordError.textContent = ''
+        let isValid = true;
+
+        
+        if (!email.value) {
+            emailError.textContent = 'Email is required'
+            isValid = false
+        } else if (!emailRegex.test(email.value)){
+            emailError.textContent ='Enter a valid email '
+            isValid=false
+        }
+
+        if(!password.value){
+            passwordError.textContent='Password is required'
+            isValid=false
+        }else if (password.value.length < 6 ){
+            passwordError.textContent='Password must be greater than 6 char'
+            isValid=false
+        }
+
+        if(isValid){
+            alert('form submitted')
+            email.value=''
+            password.value=''
+        }
+    })
+
+</script>
+</html>

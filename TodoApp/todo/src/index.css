@@ -2,13 +2,10 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #040412;
+  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -55,10 +52,6 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-input{
-  padding: 10px;
 }
 
 @media (prefers-color-scheme: light) {
